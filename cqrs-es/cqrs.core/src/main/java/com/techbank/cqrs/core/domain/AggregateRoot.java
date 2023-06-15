@@ -37,10 +37,9 @@ public abstract class AggregateRoot {
 
     protected void applyChange(BaseEvent event, Boolean isNewEvent) {
         try {
-            var method = getClass()
-                    .getDeclaredMethod(
-                            "apply",
-                            event.getClass());
+            var method = getClass().getDeclaredMethod("apply", event.getClass());
+            method.setAccessible(true); // this 2 line from here make AggregateIdentifier
+            method.invoke(this,event); // not update when we save Event to MongoDB
         } catch (NoSuchMethodException e) {
             logger.log(Level.WARNING,
                     MessageFormat.format(
