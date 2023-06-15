@@ -8,12 +8,14 @@ import com.techbank.account.query.infrastructure.handlers.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountEventConsumer implements EventConsumer{
     @Autowired
     private EventHandler eventHandler;
 
-    @KafkaListener(topics = "AccountOpenEvent",
+    @KafkaListener(topics = "AccountOpenedEvent",
             groupId = "${spring.kafka.consumer.group-id}")
     @Override
     public void consume(AccountOpenedEvent event, Acknowledgment ack) {
