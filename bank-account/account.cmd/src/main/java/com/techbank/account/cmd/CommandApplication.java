@@ -31,6 +31,9 @@ public class CommandApplication {
 		commandDispatcher.registerHandler(
 				CloseAccountCommand.class,
 				commandHandler::handle);
+		commandDispatcher.registerHandler(
+				RestoreReadDbCommand.class,
+				commandHandler::handle);
 	}
 
 	public static void main(String[] args) {
